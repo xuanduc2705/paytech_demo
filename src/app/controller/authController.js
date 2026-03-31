@@ -21,7 +21,6 @@ const successResponse = (res, data = {}, mess) => {
 export const login = async (req, res) => {
   const { accountId, password } = req.body;
   const authAccount = await detailUserDemoMd({ account_id: accountId });
-
   const dummyHash = '$2b$10$S8Z9vH6.96i6u.rD98m96uX9p8yI9q9a9b9c9d9e9f9g9h9i9j9k9';
   const targetPassword = authAccount ? authAccount.password : dummyHash;
   const isMatch = await bcrypt.compare(password, targetPassword);
@@ -32,16 +31,24 @@ export const login = async (req, res) => {
 
   const accessToken = generateAccessToken({ sub: authAccount.id });
   const refreshToken = generateRefreshToken();
-  return successResponse(res, {
-    accessToken,
-    refreshToken,
-    user_id: authAccount.id,
-  });
+  return successResponse(
+    res,
+    {
+      accessToken,
+      refreshToken,
+      user: {
+        id: authAccount.id,
+        accountId: authAccount.account_id,
+        name: authAccount.name,
+        role: authAccount.role,
+        store_id: authAccount.store_id,
+      },
+    },
+    'Login successful'
+  );
 };
 export const register = async (req, res) => {
   try {
-    console.log(req.body);
-
     const { accountId, password, email, phone, name } = req.body;
     if (!accountId || !password) {
       return errorResponse(res, 400, 'Thiếu accountId hoặc password');

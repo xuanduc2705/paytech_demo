@@ -44,6 +44,10 @@ UserDemo.init('user_demo', {
     type: 'datetime',
     allowNull: true,
   },
+  role: {
+    type: 'varchar(50)',
+    allowNull: true,
+  },
 });
 
 export const listUserDemoMd = (where, transaction, page, limit, order, attributes, group) => {
