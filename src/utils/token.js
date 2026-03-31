@@ -1,12 +1,12 @@
-import crypto from "crypto";
-import jwt from "jsonwebtoken";
-import { config } from "../config/env";
+import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
+import { config } from '../config/env';
 
-export const ACCESS_TTL = 5 * 60;
+export const ACCESS_TTL = 7 * 24 * 60 * 60;
 export const REFRESH_TTL = 1 * 24 * 60 * 60;
 
 export const hashToken = (token) => {
-  return crypto.createHash("sha256").update(token).digest("hex");
+  return crypto.createHash('sha256').update(token).digest('hex');
 };
 
 export const generateAccessToken = (payload) => {
@@ -20,5 +20,5 @@ export const verifyAccessToken = (token) => {
 };
 
 export const generateRefreshToken = () => {
-  return crypto.randomBytes(64).toString("hex");
+  return crypto.randomBytes(64).toString('hex');
 };
