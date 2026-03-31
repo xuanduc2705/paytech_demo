@@ -19,7 +19,7 @@ export const listNotification = async (req, res) => {
     status: 1,
     message: 'Get notifications successfully',
     data: {
-      item: list_real,
+      items: list_real,
       pagination: {
         page: page ? Number(page) : 1,
         limit: limit ? Number(limit) : 10,
