@@ -6,14 +6,14 @@ import { generateAccessToken, generateRefreshToken } from '../../utils/token';
 const errorResponse = (res, status, mess, code) => {
   status = typeof status === 'number' ? status : 400;
   return res.status(status).json({
-    status: 0,
+    status: 'error',
     code,
     mess,
   });
 };
 const successResponse = (res, data = {}, mess) => {
   return res.json({
-    status: 1,
+    status: 'success',
     data,
     mess,
   });
