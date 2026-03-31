@@ -1,65 +1,49 @@
-import { SequelizeBase } from "../SequelizeBase";
+import { SequelizeBase } from '../SequelizeBase';
 
 class UserDemo extends SequelizeBase {
   id;
   name;
-  accountId;
+  account_id;
   email;
   password;
   phone;
   store_id;
 }
 
-UserDemo.init("user_demo", {
+UserDemo.init('user_demo', {
   id: {
-    type: "int",
+    type: 'int',
     primaryKey: true,
     autoIncrement: true,
   },
   name: {
-    type: "varchar(255)",
+    type: 'varchar(255)',
     allowNull: true,
   },
-  accountId: {
-    type: "varchar(100)",
+  account_id: {
+    type: 'varchar(100)',
     allowNull: true,
   },
   email: {
-    type: "varchar(255)",
+    type: 'varchar(255)',
     allowNull: true,
   },
   password: {
-    type: "varchar(255)",
+    type: 'varchar(255)',
     allowNull: true,
   },
   phone: {
-    type: "varchar(20)",
+    type: 'varchar(20)',
     allowNull: true,
   },
   store_id: {
-    type: "int",
+    type: 'int',
     allowNull: true,
   },
 });
 
-export const listUserDemoMd = (
-  where,
-  transaction,
-  page,
-  limit,
-  order,
-  attributes,
-  group,
-) => {
-  return UserDemo.find(
-    where,
-    transaction,
-    page,
-    limit,
-    order,
-    attributes,
-    group,
-  );
+export const listUserDemoMd = (where, transaction, page, limit, order, attributes, group) => {
+  return UserDemo.find(where, transaction, page, limit, order, attributes, group);
 };
 
 export const countUserDemoMd = (where, transaction) => {

@@ -21,7 +21,7 @@ const successResponse = (res, data = {}, mess) => {
 export const login = async (req, res) => {
   const { accountId, password } = req.input;
   const authAccount = await detailUserDemoMd({
-    [Op.or]: [{ '$user.accountId$': accountId }],
+    [Op.or]: [{ '$user.account_id$': accountId }],
   });
 
   const dummyHash = '$2b$10$S8Z9vH6.96i6u.rD98m96uX9p8yI9q9a9b9c9d9e9f9g9h9i9j9k9';
@@ -50,7 +50,7 @@ export const register = async (req, res) => {
     }
 
     const existedUser = await detailUserDemoMd({
-      [Op.or]: [{ accountId }, ...(email ? [{ email }] : []), ...(phone ? [{ phone }] : [])],
+      [Op.or]: [{ account_id: accountId }, ...(email ? [{ email }] : []), ...(phone ? [{ phone }] : [])],
     });
     if (existedUser) {
       return errorResponse(res, 400, 'Tài khoản hoặc email hoặc số điện thoại đã tồn tại');
@@ -59,7 +59,7 @@ export const register = async (req, res) => {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const newUser = await createUserDemoMd({
-      accountId,
+      account_id: accountId,
       password: hashedPassword,
       email,
       phone,
