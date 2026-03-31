@@ -3,8 +3,6 @@ import { detailUserDemoMd, listNotificationMd } from '../db/config/models';
 export const listNotification = async (req, res) => {
   const { id } = req.userInfo || {};
   const { page, limit } = req.query || {};
-  console.log({ page, limit });
-
   const user = await detailUserDemoMd({ id });
   if (!user) {
     return res.status(404).json({

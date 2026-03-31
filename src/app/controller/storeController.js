@@ -10,7 +10,6 @@ export const getStoreInfo = async (req, res) => {
       data: storeInfo,
     });
   } catch (error) {
-    console.error('Error fetching store info:', error);
     return res.status(500).json({
       status: 'error',
       message: 'An error occurred while fetching store info',
