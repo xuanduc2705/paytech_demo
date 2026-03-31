@@ -1,4 +1,3 @@
-import { Sequelize } from 'sequelize';
 import { SequelizeBase } from '../SequelizeBase';
 
 class Notification extends SequelizeBase {
@@ -16,77 +15,97 @@ class Notification extends SequelizeBase {
   store_id;
   is_read;
   created_at;
+  deleted_at;
+  status;
+  actor_method;
+  bank;
+  card_number;
+  customer_name;
+  check_code;
 }
 
 Notification.init('notification', {
   id: {
     type: 'int',
     primaryKey: true,
+    autoIncrement: true,
   },
-  type: {
-    type: 'varchar(50)',
-    allowNull: true,
-  },
-  event: {
-    type: 'varchar(100)',
-    allowNull: true,
-  },
-  title: {
-    type: 'varchar(255)',
-    allowNull: true,
-  },
-  actor_id: {
-    type: 'int',
-    allowNull: true,
-  },
-  actor_name: {
-    type: 'varchar(255)',
-    allowNull: true,
-  },
-  actor_type: {
-    type: 'varchar(100)',
-    allowNull: true,
-  },
-  amount_krw: {
-    type: 'bigint',
-    allowNull: true,
-  },
-  amount_vnd: {
-    type: 'bigint',
-    allowNull: true,
-  },
-  currency: {
-    type: 'varchar(10)',
-    allowNull: true,
-  },
-  order_id: {
-    type: 'varchar(100)',
-    allowNull: true,
-  },
-  store_id: {
-    type: 'int',
-    allowNull: true,
-  },
-  is_read: {
-    type: 'tinyint(1)',
-    allowNull: true,
-    defaultValue: 0,
-  },
-  created_at: {
-    type: 'datetime',
-    allowNull: true,
-  },
-  deleted_at: {
-    type: 'datetime',
-    allowNull: true,
-  },
+  type: { type: 'varchar(50)' },
+  event: { type: 'varchar(100)' },
+  title: { type: 'varchar(255)' },
+  actor_id: { type: 'int' },
+  actor_name: { type: 'varchar(255)' },
+  actor_type: { type: 'varchar(100)' },
+  amount_krw: { type: 'bigint' },
+  amount_vnd: { type: 'bigint' },
+  currency: { type: 'varchar(10)' },
+  order_id: { type: 'varchar(100)' },
+  store_id: { type: 'int' },
+  is_read: { type: 'tinyint(1)', defaultValue: 0 },
+  created_at: { type: 'datetime' },
+  deleted_at: { type: 'datetime' },
+  status: { type: 'tinyint(1)' },
+  actor_method: { type: 'varchar(50)' },
+  bank: { type: 'varchar(50)' },
+  card_number: { type: 'varchar(50)' },
+  customer_name: { type: 'varchar(150)' },
+  check_code: { type: 'varchar(50)' },
 });
-export const listNotificationMd = (where, transaction, page, limit, order, attributes, group) => {
-  return Notification.find(where, transaction, page, limit, order, attributes, group);
-};
+import { SequelizeBase } from '../SequelizeBase';
 
-export const countNotificationMd = (where, transaction) => {
-  return Notification.count(where, transaction);
+class Notification extends SequelizeBase {
+  id;
+  type;
+  event;
+  title;
+  actor_id;
+  actor_name;
+  actor_type;
+  amount_krw;
+  amount_vnd;
+  currency;
+  order_id;
+  store_id;
+  is_read;
+  created_at;
+  deleted_at;
+  status;
+  actor_method;
+  bank;
+  card_number;
+  customer_name;
+  check_code;
+}
+
+Notification.init('notification', {
+  id: {
+    type: 'int',
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  type: { type: 'varchar(50)' },
+  event: { type: 'varchar(100)' },
+  title: { type: 'varchar(255)' },
+  actor_id: { type: 'int' },
+  actor_name: { type: 'varchar(255)' },
+  actor_type: { type: 'varchar(100)' },
+  amount_krw: { type: 'bigint' },
+  amount_vnd: { type: 'bigint' },
+  currency: { type: 'varchar(10)' },
+  order_id: { type: 'varchar(100)' },
+  store_id: { type: 'int' },
+  is_read: { type: 'tinyint(1)', defaultValue: 0 },
+  created_at: { type: 'datetime' },
+  deleted_at: { type: 'datetime' },
+  status: { type: 'tinyint(1)' },
+  actor_method: { type: 'varchar(50)' },
+  bank: { type: 'varchar(50)' },
+  card_number: { type: 'varchar(50)' },
+  customer_name: { type: 'varchar(150)' },
+  check_code: { type: 'varchar(50)' },
+});
+export const listNotificationMd = (where, transaction, page, limit, order, attributes) => {
+  return Notification.find(where, transaction, page, limit, order, attributes);
 };
 
 export const detailNotificationMd = (where, transaction) => {
@@ -100,9 +119,3 @@ export const createNotificationMd = (data, transaction) => {
 export const updateNotificationMd = (data, where, transaction) => {
   return Notification.update(data, where, transaction);
 };
-
-export const deleteNotificationMd = (where, transaction) => {
-  return Notification.softDelete(where, transaction);
-};
-
-export default Notification;
