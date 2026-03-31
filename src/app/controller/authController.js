@@ -19,7 +19,7 @@ const successResponse = (res, data = {}, mess) => {
   });
 };
 export const login = async (req, res) => {
-  const { accountId, password } = req.input;
+  const { accountId, password } = req.body;
   const authAccount = await detailUserDemoMd({
     [Op.or]: [{ '$user.account_id$': accountId }],
   });
