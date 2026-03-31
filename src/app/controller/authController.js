@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
-import { detailUserDemoMd } from '../db/config/models';
+import { createUserDemoMd, detailUserDemoMd } from '../db/config/models';
 import { generateAccessToken, generateRefreshToken } from '../../utils/token';
 
 const errorResponse = (res, status, mess, code) => {
