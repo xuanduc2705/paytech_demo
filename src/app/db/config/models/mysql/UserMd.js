@@ -40,6 +40,10 @@ UserDemo.init('user_demo', {
     type: 'int',
     allowNull: true,
   },
+  deleted_at: {
+    type: 'datetime',
+    allowNull: true,
+  },
 });
 
 export const listUserDemoMd = (where, transaction, page, limit, order, attributes, group) => {
