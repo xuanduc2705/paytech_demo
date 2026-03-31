@@ -23,7 +23,7 @@ export const login = async (req, res) => {
   const authAccount = await detailUserDemoMd({ account_id: accountId });
 
   const dummyHash = '$2b$10$S8Z9vH6.96i6u.rD98m96uX9p8yI9q9a9b9c9d9e9f9g9h9i9j9k9';
-  const targetPassword = authAccount ? authAccount.provider_key : dummyHash;
+  const targetPassword = authAccount ? authAccount.password : dummyHash;
   const isMatch = await bcrypt.compare(password, targetPassword);
 
   if (!authAccount || !isMatch) {
