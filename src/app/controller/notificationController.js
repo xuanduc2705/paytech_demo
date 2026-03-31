@@ -2,6 +2,7 @@ import { detailUserDemoMd, listNotificationMd } from '../db/config/models';
 
 export const listNotification = async (req, res) => {
   const { id } = req.userInfo || {};
+  const { page, limit } = req.query || {};
   const user = await detailUserDemoMd({ id });
   if (!user) {
     return res.status(404).json({
@@ -10,10 +11,18 @@ export const listNotification = async (req, res) => {
       data: {},
     });
   }
-  const list = await listNotificationMd({ store_id: user.store_id });
+  const list = await listNotificationMd({ store_id: user.store_id }, null, Number(page), Number(limit), [['created_at', 'DESC']]);
   return res.status(200).json({
     status: 1,
-    message: '알림 목록을 성공적으로 조회했습니다.',
-    data: list,
+    message: 'Get notifications successfully',
+    data: {
+      item: list,
+      pagination: {
+        page: page ? Number(page) : 1,
+        limit: limit ? Number(limit) : 10,
+        total: list?.length || 0,
+        unreadCount: list?.filter((n) => n.is_read === 0)?.length || 0,
+      },
+    },
   });
 };
