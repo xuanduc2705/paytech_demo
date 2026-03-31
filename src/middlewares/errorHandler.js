@@ -3,15 +3,15 @@ const logger = {
   error: console.error,
 };
 const errorResponse = (res, status, mess, code) => {
-  status = typeof status === "number" ? status : 400;
+  status = typeof status === 'number' ? status : 400;
   return res.status(status).json({
-    status: 0,
+    status: 'error',
     code,
     mess,
   });
 };
 export const errorHandler = (err, req, res, next) => {
-  logger.error("Error occurred:", {
+  logger.error('Error occurred:', {
     message: err.message,
     stack: err.stack,
     status: err.status,
@@ -21,8 +21,8 @@ export const errorHandler = (err, req, res, next) => {
     requestId: req.id,
   });
 
-  const isDevelopment = process.env.NODE_ENV === "development";
-  const message = isDevelopment ? err.message : "Internal Server Error";
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  const message = isDevelopment ? err.message : 'Internal Server Error';
 
-  errorResponse(res, err.status || 500, message, err.code || "INTERNAL_ERROR");
+  errorResponse(res, err.status || 500, message, err.code || 'INTERNAL_ERROR');
 };
