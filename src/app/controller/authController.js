@@ -20,9 +20,7 @@ const successResponse = (res, data = {}, mess) => {
 };
 export const login = async (req, res) => {
   const { accountId, password } = req.body;
-  const authAccount = await detailUserDemoMd({
-    [Op.or]: [{ '$user.account_id$': accountId }],
-  });
+  const authAccount = await detailUserDemoMd({ account_id: accountId });
 
   const dummyHash = '$2b$10$S8Z9vH6.96i6u.rD98m96uX9p8yI9q9a9b9c9d9e9f9g9h9i9j9k9';
   const targetPassword = authAccount ? authAccount.provider_key : dummyHash;
