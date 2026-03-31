@@ -13,8 +13,8 @@ export const validateMiddleware = (input) => {
       next();
     } catch (err) {
       return res.status(400).json({
-        status: "error",
-        message: "Internal server error",
+        status: 'error',
+        messageage: 'Internal server error',
         data: {},
       });
     }

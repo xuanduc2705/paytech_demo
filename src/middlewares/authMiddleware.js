@@ -1,12 +1,12 @@
 import { detailUserDemoMd } from '../app/db/config/models';
 import { verifyAccessToken } from '../utils/token';
 
-const errorResponse = (res, status, mess, code) => {
+const errorResponse = (res, status, message, code) => {
   status = typeof status === 'number' ? status : 400;
   return res.status(status).json({
     status: 'error',
     code,
-    mess,
+    message,
   });
 };
 export const authMiddleware = async (req, res, next) => {

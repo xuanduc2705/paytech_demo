@@ -3,19 +3,19 @@ import { Op } from 'sequelize';
 import { createUserDemoMd, detailUserDemoMd } from '../db/config/models';
 import { generateAccessToken, generateRefreshToken } from '../../utils/token';
 
-const errorResponse = (res, status, mess, code) => {
+const errorResponse = (res, status, message, code) => {
   status = typeof status === 'number' ? status : 400;
   return res.status(status).json({
     status: 'error',
     code,
-    mess,
+    message,
   });
 };
-const successResponse = (res, data = {}, mess) => {
+const successResponse = (res, data = {}, message) => {
   return res.json({
     status: 'success',
     data,
-    mess,
+    message,
   });
 };
 export const login = async (req, res) => {
