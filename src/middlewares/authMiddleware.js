@@ -26,6 +26,8 @@ export const authMiddleware = async (req, res, next) => {
     req.userInfo = { ...account };
     next();
   } catch (err) {
+    console.log(err);
+
     return errorResponse(res, 401, '토큰이 유효하지 않거나 만료되었습니다.', 'TOKEN_EXPIRED');
   }
 };
