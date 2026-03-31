@@ -11,12 +11,13 @@ export const listNotification = async (req, res) => {
       data: {},
     });
   }
-  const list = await listNotificationMd({ store_id: user.store_id }, null, Number(page), Number(limit), [['created_at', 'DESC']]);
+  const list = await listNotificationMd({ store_id: user.store_id });
+  const list_real = await listNotificationMd({ store_id: user.store_id }, null, Number(page), Number(limit), [['created_at', 'DESC']]);
   return res.status(200).json({
     status: 1,
     message: 'Get notifications successfully',
     data: {
-      item: list,
+      item: list_real,
       pagination: {
         page: page ? Number(page) : 1,
         limit: limit ? Number(limit) : 10,
